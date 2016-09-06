@@ -1,0 +1,44 @@
+#!/bin/bash
+#Written by: Mirza Hubjer
+#mhubjer@gmail.com
+
+#if you receive an output saying that another process is using this command, this is most likely 
+#the autoupdate process which starts during user login. To disable this run the 
+#following command: "sudo rm /var/lib/dpkg/lock && sudo dpkg --configure -a". You should have no 
+#issues then.
+
+TIME=$(date "+%H")
+NOW=$(date "+%r")
+if [ $TIME -lt 12 ]; then 
+	echo "GOOD MORNING, SIR. HOPE ALL IS WELL. RUNNING SYSTEM UPDATE..."
+elif [ $TIME -lt 18 ]; then
+	echo "GOOD AFTERNOON, SIR. HOPE ALL IS WELL. RUNNING SYSTEM UPDATE..."
+else
+	echo "GOOD EVENING, SIR. HOPE ALL IS WELL. RUNNING SYSTEM UPDATE..."
+fi
+sleep 4
+	sudo apt-get update &>/dev/null &
+	echo "REPOSITORY UPDATE COMPLETE, SIR. UPGRADING SYSTEM..."
+sleep 7	
+clear
+	sudo apt-get upgrade
+	echo "----------------------------"
+	echo "UPGRADE COMPLETE"
+	echo "----------------------------"
+sleep 5
+clear
+	echo "--------------------------------------------------------"
+	echo "LOCAL TIME IS $NOW. ENJOY YOUR SESSION, SIR." 
+	echo "--------------------------------------------------------"
+sleep 2
+
+#figlet and mpg123 need to be downloaded in order for this extra TRON gift to work :)
+#sudo apt-get install mpg123
+#sudo apt-get install figlet
+#The mp3 file will be included in the package. Make sure to link to the right directory on the #bottom line in order for it to work properly. HAVE FUN!
+
+	figlet 'END OF LINE'
+	mpg123 /home/$USER/Downloads/"END OF LINE"/"END OF LINE.mp3"&>/dev/null &
+sleep 4
+clear
+gnome-terminal
